@@ -1,0 +1,573 @@
+<title>Craigsville Little League</title>
+
+			<link href="/assets/css/fullcalendar.css" rel="stylesheet" />
+			<link href="/assets/css/fullcalendar.print.css" rel="stylesheet" media="print" />
+			<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+			<link href="/assets/css/bootstrap-reset.css" rel="stylesheet">
+			<link href="/assets/css/schedule.css" rel="stylesheet">
+
+			<!--Daterange Picker-->
+			<link rel="stylesheet" type="text/css" media="all" href="/assets/css/daterangepicker.css" />
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.min.css" />
+
+<div style="background-color: #AAB2BC; color: #FFF;">		
+		<p class="logo">
+		<em>Craigsville Little League Game Schedule</em>
+		</p>
+		<p>powered by Schedule Monster</p>		
+	</div>
+	
+<div id="wrap" style="background-color: #424B63;">
+
+<div id="calendar"></div>
+
+<div style="clear:both"></div>
+
+<!--Create Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="create-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" id="cancel-box-create" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="create-header-text">Schedule a Game</h4>
+				
+			</div>
+			<div class="modal-body" style="background-color: #424B63;">
+				<form id="create-game-form">
+					<label class="col-xs-4 font-white" for="title" id="title-label" style="margin-top: 5px;">Game Description</label>
+					<input class="form-control" style="width: 350px;" type="text" name="title" id="title" placeholder="Enter Game Description"/>
+
+					<div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+						<div id="select-date" style="margin-top: 25px;">
+							<div class="row" id="start">
+								<div class="col-xs-12">
+									<label class="col-xs-4 my-modal-label font-white" for="starts-at" id="start-label">Starts at</label>
+									<input class="form-control" style="width: 350px; margin-top: -10px;" type="text" name="starts-at" id="starts-at" placeholder="Select Start" required/>
+									
+								</div>
+							</div>
+							<div class="row" id="end">
+								<div class="col-xs-12">
+									<label class="col-xs-4 my-modal-label font-white" for="ends-at" id="end-label" style="margin-top:15px;">Ends at</label>
+									<input class="form-control" type="text" name="ends-at" id="ends-at" style="width: 350px; margin-top: 10px;" placeholder="Select End" required/>
+									
+								</div>
+							</div>
+						</div>	
+					</div>	
+					<div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+						<div class="col-xs-12" style="border-top: 1px solid #D3D3D3; border-bottom: 1px solid #D3D3D3; padding-top:10px;">
+							<label class="col-xs-4 font-white" id="details-label">Game Details</label>
+						</div>
+					</div>                         
+					<div class="row" id="game-details" style="padding-top:10px; margin-bottom: 10px;"> 
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="location" id="location-label" style="margin-top:10px;">Location</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="location" name="location">
+								<option value="" selected disabled>Select a Location</option>
+								<option value="craigsville-hamrick">Hamrick Field (Craigsville)</option>
+								<option value="craigsville-brown">Brown Field (Craigsville)</option>								
+								<option value="cowen">Morris Field (Cowen)</option>
+								<option value="richwood">City Park (Richwood)</option>
+								<option value="webster-springs">Curtin Field (Bergoo)</option>
+								<option value="braxton-holly-gray">Holly-Gray Park (Flatwoods)</option>
+								<option value="summersville">Memorial Park (Summersville)</option>								
+								<option value="braxton-frametown">Frametown (Braxton)</option>
+								<option value="leivasy">Leivasy (Richwood)</option>
+							</select>
+						</div>     
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="division" id="division-label" style="margin-top:10px;">Division</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="division" name="division">
+								<option value="" selected disabled>Select a Division</option>
+								<option value="t-ball">T-Ball</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-bb">Minor Baseball</option>
+								<option value="major-bb">Major Baseball</option>
+								<option value="senior-bb">Sr. Baseball</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-sb">Minor Softball</option>
+								<option value="major-sb">Major Softball</option>
+								<option value="senior-sb">Sr. Softball</option>
+							</select>
+						</div>                                   
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="home-team" id="home-team-label" style="margin-top:10px;">Craigsville Team</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="home-team">
+								<option value="" selected disabled>Select a Team</option>
+								<option value="t-ball-team-1">T-Ball 1</option>
+								<option value="t-ball-team-2">T-Ball 2</option>
+								<option value="t-ball-team-3">T-Ball 3</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-bb-team-1">Minor Baseball 1</option>
+								<option value="minor-bb-team-2">Minor Baseball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="major-bb-team-1">Major Baseball 1</option>
+								<option value="major-bb-team-2">Major Baseball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="senior-bb-team-1">Sr. Baseball 1</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-sb-team-1">Minor Softball 1</option>
+								<option value="minor-sb-team-2">Minor Softball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="major-sb-team-1">Major Softball 1</option>
+								<option value="major-sb-team-2">Major Softball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="senior-sb-team-1">Sr. Softball 1</option>   
+								<option value="senior-sb-team-2">Sr. Softball 2</option>                                    
+							</select>
+						</div>
+						<div class="col-xs-12">
+							<label class="col-xs-4 my-modal-label font-white" for="visitor-team" id="visitor-team-label" style="margin-top:10px;">Opposing Team</label>
+							<input class="form-control" style="width: 350px;" type="text" id="visitor-team" name="visitor-team" placeholder="Enter Opposing Team">							
+						</div>					
+					</div>	
+					<div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+						<div class="col-xs-12" style="border-top: 1px solid #D3D3D3; border-bottom: 1px solid #D3D3D3; padding-top:10px;">
+							<label class="col-xs-4 font-white" id="officials-label">Officials</label>
+						</div>
+					</div> 
+					<div class="row" id="officials-details" style="padding-top:10px; margin-bottom: 10px;"> 
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="chief-umpire" id="chief-umpire-label" style="margin-top:10px;">Chief Umpire</label>
+							<input class="form-control" style="width: 350px;" type="text" id="chief-umpire" name="chief-umpire" placeholder="Enter Chief umpire">
+						</div>     
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="umpire-1" id="umpire-1-label" style="margin-top:10px;">Umpire 1</label>
+							<input class="form-control" style="width: 350px;" type="text" id="umpire-1" name="umpire-1" placeholder="Enter an Umpire">
+						</div>                                   
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="umpire-2" id="umpire-2-label" style="margin-top:10px;">Umpire 2</label>
+							<input class="form-control" style="width: 350px;" type="text" id="umpire-2" name="umpire-2" placeholder="Enter an Umpire">
+						</div>
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="concession-1" id="concession-1-label" style="margin-top:10px;">Concession 1</label>
+							<input class="form-control" style="width: 350px;" type="text" id="concession-1" name="concession-1" placeholder="Enter Worker 1">
+						</div>
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="concession-2" id="concession-2-label" style="margin-top:10px;">Concession 2</label>
+							<input class="form-control" style="width: 350px;" type="text" id="concession-2" name="concession-2" placeholder="Enter Worker 2">
+						</div>
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="board-member" id="board-member-label" style="margin-top:10px;">Board Member</label>
+							<input class="form-control" style="width: 350px;" type="text" id="board-member" name="board-member" placeholder="Enter Assigned Board Member">
+						</div>
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="scorekeeper" id="scorekeeper-label" style="margin-top:10px;">Scorekeeper</label>
+							<input class="form-control" style="width: 350px;" type="text" id="scorekeeper" name="scorekeeper" placeholder="Enter Official Scorekeeper">
+						</div>				
+					</div>				
+				</form>                         
+			</div>
+			<div class="modal-footer" style="background-color: #AAB2BC !important;">
+				<button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close" id="cancel-game-create">Go Back</button>
+				<button type="button" class="btn btn-success" id="create-game">Submit to Schedule</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--EDIT Modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" id="cancel-box-edit" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="update-header-text">Reschedule Game</h4>
+				
+			</div>
+			<div class="modal-body" style="background-color: #424B63;">
+				<form id="update-game-form">
+					<label class="col-xs-4 font-white" for="edit-title" id="edit-title-label" style="margin-top: 5px;">Game Description</label>
+					<input class="form-control" style="width: 350px;" type="text" name="edit-title" id="edit-title"/>
+
+					<div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+						<div id="select-edit-date" style="margin-top: 25px;">
+							<div class="row" id="start-edit">
+								<div class="col-xs-12">
+									<label class="col-xs-4 my-modal-label font-white" for="starts-at-edit" id="start-label">Starts at</label>
+									<input class="form-control" style="width: 350px; margin-top: -10px;" type="text" name="starts-at-edit" id="starts-at-edit" placeholder="Select Start" required/>
+									
+								</div>
+							</div>
+							<div class="row" id="end-edit">
+								<div class="col-xs-12">
+									<label class="col-xs-4 my-modal-label font-white" for="ends-at-edit" id="end-label" style="margin-top:15px;">Ends at</label>
+									<input class="form-control" type="text" name="ends-at-edit" id="ends-at-edit" style="width: 350px; margin-top: 10px;" placeholder="Select End" required/>
+									
+								</div>
+							</div>
+						</div>	
+					</div>	
+					<div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+						<div class="col-xs-12" style="border-top: 1px solid #D3D3D3; border-bottom: 1px solid #D3D3D3; padding-top:10px;">
+							<label class="col-xs-4 font-white" id="edit-details-label">Game Details</label>
+						</div>
+					</div>                         
+					<div class="row" id="edit-game-details" style="padding-top:10px; margin-bottom: 10px;"> 
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="edit-location" id="edit-location-label" style="margin-top:10px;">Location</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="edit-location" name="edit-location">
+								<option value="" selected disabled>Select a Location</option>
+								<option value="craigsville-hamrick">Hamrick Field (Craigsville)</option>
+								<option value="craigsville-brown">Brown Field (Craigsville)</option>								
+								<option value="cowen">Morris Field (Cowen)</option>
+								<option value="richwood">City Park (Richwood)</option>
+								<option value="webster-springs">Curtin Field (Bergoo)</option>
+								<option value="braxton-holly-gray">Holly-Gray Park (Flatwoods)</option>
+								<option value="summersville">Memorial Park (Summersville)</option>								
+								<option value="braxton-frametown">Frametown (Braxton)</option>
+								<option value="leivasy">Leivasy (Richwood)</option>
+							</select>
+						</div>     
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="edit-division" id="edit-division-label" style="margin-top:10px;">Division</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="edit-division" name="edit-division">
+								<option value="" selected disabled>Select a Division</option>
+								<option value="t-ball">T-Ball</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-bb">Minor Baseball</option>
+								<option value="major-bb">Major Baseball</option>
+								<option value="senior-bb">Sr. Baseball</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-sb">Minor Softball</option>
+								<option value="major-sb">Major Softball</option>
+								<option value="senior-sb">Sr. Softball</option>
+							</select>
+						</div>                                   
+						<div class="col-xs-12 my-modal-section">
+							<label class="col-xs-4 my-modal-label font-white" for="edit-home-team" id="edit-home-team-label" style="margin-top:10px;">Craigsville Team</label>
+							<select class="form-control" style="width: 350px; margin-top: 3px;" id="edit-home-team">
+								<option value="" selected disabled>Select a Team</option>
+								<option value="t-ball-team-1">T-Ball 1</option>
+								<option value="t-ball-team-2">T-Ball 2</option>
+								<option value="t-ball-team-3">T-Ball 3</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-bb-team-1">Minor Baseball 1</option>
+								<option value="minor-bb-team-2">Minor Baseball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="major-bb-team-1">Major Baseball 1</option>
+								<option value="major-bb-team-2">Major Baseball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="senior-bb-team-1">Sr. Baseball 1</option>
+								<option value="" disabled>---------------</option>
+								<option value="minor-sb-team-1">Minor Softball 1</option>
+								<option value="minor-sb-team-2">Minor Softball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="major-sb-team-1">Major Softball 1</option>
+								<option value="major-sb-team-2">Major Softball 2</option>
+								<option value="" disabled>---------------</option>
+								<option value="senior-sb-team-1">Sr. Softball 1</option>   
+								<option value="senior-sb-team-2">Sr. Softball 2</option>                                    
+							</select>
+						</div>
+						<div class="col-xs-12">
+							<label class="col-xs-4 my-modal-label font-white" for="edit-visitor-team" id="visitor-team-label" style="margin-top:10px;">Opposing Team</label>
+							<input class="form-control" style="width: 350px;" type="text" id="edit-visitor-team" name="edit-visitor-team">							
+						</div>
+						
+					</div>					
+				</form>                       
+			</div>
+			<div class="modal-footer" style="background-color: #AAB2BC !important;">
+				<button type="button" class="btn btn-danger" id="delete-game" style="float: left;">Cancel Game</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close" id="cancel-game-edit">Go Back</button>
+				<button type="button" class="btn btn-success" id="update-game">Submit Reschedule</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--delete modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button id="delete-close" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="delete-header">Cancel Game?</h4>
+			</div>
+			<div class="modal-body">
+				<h4 id="delete-modal-body">Are you sure you want to cancel <span id="remove-game" style="font-weight: bold;"></span> ?</h4>
+				<div class="modal-footer">						
+					<button class="btn btn-danger" data-dismiss="modal" aria-label="Close" type="button" id="cancel-delete">No</button>
+					<button class="btn btn-success" type="submit" id="delete-submit">Yes</button>  
+				</div>                                                         
+			</div>                                    
+		</div>
+	</div>
+</div><!--delete modal close-->
+
+</div>
+
+
+<script src="/assets/js/jquery-1.10.2.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery-ui.custom.min.js"></script>
+<script src="/assets/js/fullcalendar.js"></script>
+<script src="/assets/js/all_pages.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" type="text/javascript"></script>
+
+
+<!--toastr-->
+<script src="/assets/toastr-master/toastr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+<!--datepicker-->
+<script type="text/javascript" src="/assets/js/daterangepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" type="text/javascript"></script>
+
+
+
+
+<script>
+
+	$(document).ready(function() {
+
+		setDateFormat();
+		//getAllGames();
+
+	    var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		var eventArray = [];
+		var startDate = new Date();
+		var endDate = new Date();
+		var eventId = "";
+
+		$("#starts-at").datetimepicker({
+			format: "MMM DD, YYYY h:mm a",
+			formatTime: "h:mm a",
+			formatDate: "MMM DD, YYYY",
+			formData: "h:mm a",
+			dynamic: true,
+			defaultDate: new Date(),
+			step: 30,
+			autoclose: true,
+		}).on("change", function() {
+			dateChange = true;
+			startDate = moment($("#starts-at").datetimepicker("getValue")).format("YYYY-MM-DDTHH:mm:ssZZ");
+			endDate = moment($("#starts-at").datetimepicker("getValue")).add(120, "minutes").format("YYYY-MM-DDTHH:mm:ssZZ");
+			$("#ends-at").val(moment($("#starts-at").datetimepicker("getValue")).add(120, "minutes").format("MMM DD, YYYY h:mm a"));
+			$("#starts-at").css("border-color", "#e2e2e4");
+			//selectedPickerDate = $("#ends-at").datetimepicker("option", "minDate", moment($("#starts-at").datetimepicker("getValue")).add(15, "minutes").format("MMM DD, YYYY h:mm a"));  
+		});
+
+		$("#ends-at").datetimepicker({
+			format: "MMM DD, YYYY h:mm a",
+			formatTime: "h:mm a",
+			formatDate: "MMM DD, YYYY",
+			formData: "h:mm a",
+			dynamic: true,
+			defaultDate: new Date(),
+			autoclose: true,
+			step: 30
+		}).on("change", function() {
+			$("#ends-at").css("border-color", "#e2e2e4");
+			endDate = moment($("#ends-at").datetimepicker("getValue")).format("YYYY-MM-DDTHH:mm:ssZZ");
+		});
+
+		$("#starts-at-edit").datetimepicker({
+			format: "MMM DD, YYYY h:mm a",
+			formatTime: "h:mm a",
+			formatDate: "MMM DD, YYYY",
+			formData: "h:mm a",
+			dynamic: true,
+			defaultDate: new Date(),
+			step: 30,
+			autoclose: true,
+		}).on("change", function() {
+			dateChange = true;
+			startEdit = moment($("#starts-at-edit").datetimepicker("getValue")).format("YYYY-MM-DDTHH:mm:ssZZ");
+			endEdit = moment($("#starts-at-edit").datetimepicker("getValue")).add(120, "minutes").format("YYYY-MM-DDTHH:mm:ssZZ");
+			$("#ends-at-edit").val(moment($("#starts-at-edit").datetimepicker("getValue")).add(120, "minutes").format("MMM DD, YYYY h:mm a"));
+			$("#starts-at-edit").css("border-color", "#e2e2e4");
+			//selectedPickerDate = $("#ends-at-edit").datetimepicker("option", "minDate", moment($("#starts-at-edit").datetimepicker("getValue")).add(15, "minutes").format("MMM DD, YYYY h:mm a"));  
+		});
+
+		$("#ends-at-edit").datetimepicker({
+			format: "MMM DD, YYYY h:mm a",
+			formatTime: "h:mm a",
+			formatDate: "MMM DD, YYYY",
+			formData: "h:mm a",
+			dynamic: true,
+			defaultDate: new Date(),
+			autoclose: true,
+			step: 30
+		}).on("change", function() {
+			$("#ends-at-edit").css("border-color", "#e2e2e4");
+			endEdit = moment($("#ends-at-edit").datetimepicker("getValue")).format("YYYY-MM-DDTHH:mm:ssZZ");
+		});
+
+		$("#create-game").on("click", function() {
+			submitGameEvent();
+		});
+
+		$("#delete-game").on("click", function() {
+			$("#deleteModal").modal("show");
+			$("#remove-game").text($("#edit-title").val());
+		});
+
+		$("#delete-submit").on("click", function() {
+			console.log(eventArray)
+		});
+	
+		function getAllGames(){
+			$.ajax({
+				url: "http://localhost:3000/api/games",
+				dataType: "json",
+				type: "GET",
+				data: {},
+				success: function (result) {
+					console.log(result);					
+				}
+			});
+		}
+		
+	
+		/* initialize the calendar
+		-----------------------------------------------------------------*/
+		eventArray = [				
+				{
+					id:1,
+					title:"new game",
+					start:"2018-10-09T20:00:00.000Z",
+					is_all_day:false,
+					opposing_team:"afdgadfgadfg",
+					division:"major-bb",
+					location:"craigsville-hamrick",
+					className:"info"
+				},
+				{
+					id:2,
+					"title":"Test Date",
+					"start":"2018-10-04T13:30:00-0400",
+					"end":"2018-10-04T15:30:00-0400",
+					"is_all_day":false,
+					"opposing_team":"adfgadfasdfasdf",
+					"division":"major-sb",
+					"location":"craigsville-hamrick",
+					"className:":"info"
+				},
+				{
+					"id":3,"title":"Test next game","start":"2018-10-11T17:30:00-0400","end":"2018-10-11T19:30:00-0400","is_all_day":false,"opposing_team":"xfghstg","division":"minor-bb","location":"craigsville-hamrick","className:":"info"
+				},
+			];	
+		
+		var calendar =  $("#calendar").fullCalendar({
+			header: {
+				left: "title",
+				center: "",
+				right: "prev,next New"
+			},
+			editable: true,
+			firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+			selectable: true,
+			defaultView: "month",
+			dayClick: function(date, jsEvent, view) {
+				$("#create-modal").modal("show");
+			},
+			axisFormat: "h:mm",
+			columnFormat: {
+                month: "ddd",    // Mon
+                week: "ddd d", // Mon 7
+                day: "dddd M/d",  // Monday 9/7
+                agendaDay: "dddd d"
+            },
+            titleFormat: {
+                month: "MMMM yyyy", // September 2009
+                week: "MMMM yyyy", // September 2009
+                day: "MMMM yyyy"                  // Tuesday, Sep 8, 2009
+            },
+			allDaySlot: false,
+			events: eventArray,
+			eventClick: function(event, element, view) {
+				eventId = event.id;
+				$("#edit-title").val(event.title);
+				$("#starts-at-edit").attr("placeholder", moment(event.start).format("MMM D, YYYY h:mm a"));
+				$("#starts-at-edit").val(moment(event.start).format("MMM D, YYYY h:mm a"));
+				$("#ends-at-edit").val(moment(event.end).format("MMM D, YYYY h:mm a"));
+				$("#edit-modal").modal("show");
+				console.log(event);
+			}	
+		});
+
+		//-------------------------------------------------------
+		// Submit create function
+		function submitGameEvent() {
+			newId = eventArray.length + 1;
+			formData = {data: {
+				"id"							: newId,
+				"title"                   		: $("#title").val(),
+				"start_time"                    		: startDate,
+				"end_time"                      		: endDate,
+				"is_all_day"                    : false,
+				"home_team"              		: $("#home-team").val(),
+				"visitor_team"                 	: $("#visitor-team").val(),
+				"division"                    	: $("#division").val(),
+				"location"                    	: $("#location").val(),
+				"chief_umpire"              	: $("#chief-umpire").val(),
+				"umpire_1"                   	: $("#umpire-1").val(),
+				"umpire_2"                  	: $("#umpire-2").val(),
+				"concession_1"                  : $("#concession-1").val(),
+				"concession_2"                  : $("#concession-2").val(),
+				"board_member"					: $("#board-member").val(),
+				"scorekeeper"					: $("#scorekeeper").val(),
+				"color"							: $("#color").val(),
+			}}; 
+			console.log(JSON.stringify(formData));
+
+			 $.ajax({
+                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url         : 'http://localhost/api/game', // the url where we want to POST
+                data        : formData, // our data object
+                dataType    : 'json', // what type of data do we expect back from the server
+                encode      : true
+            })
+                // using the done promise callback
+                .done(function(data) {
+                    // Success, so clear
+                    console.log(data)
+                    // Show success alert
+                    //swal("Success!", data.data.product_name + " was added.", "success");
+                })
+                .fail(function(data){
+                    // In a fail, we need to look inside the responseJSON object for our
+                    // APIs error message
+					console.log(data);
+                   // swal("Oops...", data.responseJSON.data.error, "error");
+                });
+			/*axios({
+				method  : "POST",
+				url     : "http://localhost/api/games",
+				data    : JSON.stringify(formData),
+			})
+			.then(function (response) {			
+				if(response) {
+					console.log(response);
+				}                
+			})
+			.catch(function (error) {
+				if (error) {
+					console.log(error);
+					console.log(error.data);
+					
+				}                
+			});*/
+
+			/*console.log(JSON.stringify(formData));
+			var jsonData = JSON.stringify(formData);
+			//var FileSaver = require('file-saver');
+			//var blob = new Blob([jsonData], {type: "application/json"});
+			//FileSaver.saveAs(blob, "games.json");
+			$("#create-modal").modal("hide");
+			$("#calendar").fullCalendar("removeEvents");				
+			$("#calendar").fullCalendar("addEventSource", eventArray);*/
+
+
+		}  
+	
+	});
+
+</script>

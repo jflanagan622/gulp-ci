@@ -1,0 +1,1 @@
+var webdriver=require("selenium-webdriver"),browser=(new webdriver.Builder).forBrowser("chrome").build();browser.get("https://google.com");var promise=browser.getTitle();promise.then(function(e){}),browser.quit();

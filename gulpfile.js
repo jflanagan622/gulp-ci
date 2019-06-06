@@ -104,7 +104,6 @@ gulp.task("images", function(){
 });
 
 //webhook for github
-//again
 app.get("/webhook", function(req, res) {
   gulp.src("./gulpfile.js", { read: false})
     .pipe( chug( {
